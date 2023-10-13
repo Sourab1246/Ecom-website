@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Register HERE!</h1>
+    <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+
+
+</body>
+<script>
+    const passwordInput = document.getElementById("id_password1");
+    const strengthProgressBar = document.getElementById("password-strength");
+
+    passwordInput.addEventListener("input", () => {
+        const password = passwordInput.value;
+        const strength = calculatePasswordStrength(password);
+
+        strengthProgressBar.value = strength;
+    });
+
+    function calculatePasswordStrength(password) {
+        
+        if (password.length >= 8) {
+            return 100;
+        } else {
+            return (password.length / 8) * 100;
+        }
+    }
+</script>
+
+</html>

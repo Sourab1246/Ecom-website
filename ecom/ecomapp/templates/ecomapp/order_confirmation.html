@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>OrderConfirmation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        {% block content %}
+        <h1>Order Confirmation</h1>
+      
+        {% if order %}
+          <h2>Order Details</h2>
+          <p><strong>Order ID:</strong> {{ order.id }}</p>
+          <p><strong>Total Amount:</strong> &#8377;{{ order.total }}</p>
+          <p><strong>Shipping Address:</strong> {{ order.shipping_address }}</p>
+          <p>Thank you for your order!</p>
+        {% else %}
+          <p>Order not found. Please contact customer support for assistance.</p>
+        {% endif %}
+      {% endblock %}
+    </body>
+</html>

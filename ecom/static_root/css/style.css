@@ -1,0 +1,8 @@
+body{
+    background-color: cadetblue;
+}
+
+.custom-icon {
+    font-size: 40px; /* Adjust the size as needed */
+    color: #FFA500; /* Optionally, set the icon color */
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Checkout</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        
+
+{% block content %}
+  <h1>Checkout</h1>
+
+  <form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    
+    <!-- Shipping Address Section -->
+    <fieldset>
+      <legend>Shipping Address</legend>
+      {{ form.shipping_address.label_tag }}
+      {{ form.shipping_address }}
+      
+      {{ form.city.label_tag }}
+      {{ form.city }}
+      
+      {{ form.state.label_tag }}
+      {{ form.state }}
+      
+      {{ form.zip_code.label_tag }}
+      {{ form.zip_code }}
+      
+      {{ form.country.label_tag }}
+      {{ form.country }}
+      
+      {{ form.phone_number.label_tag }}
+      {{ form.phone_number }}
+    </fieldset>
+
+    <!-- Payment Information Section (Add your payment fields here) -->
+    <fieldset>
+      <legend>Payment Information</legend>
+      <!-- Add payment fields here, e.g., credit card number, expiration date, etc. -->
+    </fieldset>
+
+    <!-- Order Summary Section -->
+    <fieldset>
+      <legend>Order Summary</legend>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cart_item in cart_items %}
+            <tr>
+              <td>{{ cart_item.product.name }}</td>
+              <td>${{ cart_item.product.price }}</td>
+              <td>{{ cart_item.quantity }}</td>
+              <td>&#8377;{{ cart_item.item_total }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Total:</td>
+            <td>${{ total_price }}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </fieldset>
+
+    <!-- Submit Button -->
+    
+ 
+  <form method="post" action="{% url 'create_order' %}">
+    <!-- Other checkout form fields -->
+    <input type="radio" name="payment_option" value="COD" checked> Cash on Delivery
+    <input type="submit" value="Place Order">
+
+  </form>
+{% endblock %}
+
+    
+    </body>
+</html>
