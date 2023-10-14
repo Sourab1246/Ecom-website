@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Product,CartItem,Order
+from .models import Product,CartItem,Order,Cart
 from django.contrib import messages
 from .forms import  RegistrationForm,AuthenticationForm,ShippingAddressForm,OrderForm
 from django.contrib.auth.models import User
@@ -47,11 +47,15 @@ def product_detail(request,product_id):
 
 @login_required
 def add_to_cart(request,product_id):
-    product=Product.objects.get(id=product_id)
-    cart_item,created=CartItem.objects.get_or_create(user=request.user,product=product)
-    if not_created:
+    product=get_object_or_404(Product, pk=product_id)
+    user = request.user
+    cart,created=Cart.objects.get_or_create(user=request.user,product=product)
+    cart_item,item_created=CartItem.objects.get_or_create(cart=cart,product=product)
+    
+    if not item_created:
         cart_item.quantity +=1
         cart_item.save()
+    cart_item.update_subtotal()
     return redirect('view_cart')
 @login_required
 def remove_from_cart(request,cart_item_id):
@@ -63,11 +67,12 @@ def remove_from_cart(request,cart_item_id):
 @login_required
 def view_cart(request):
     cart_items=CartItem.objects.filter(user=request.user)
+    print (cart_items)
+
     for cart_items in cart_items:
         cart_item.item_total=cart_item.product.price * cart_item.quantity
     total_price=sum(cart_item.item_total for cart_item in cart_items )
     return render(request,'ecomapp/cart.html',{'cart_items':cart_items,'total_price':total_price})
-    print ('cart_items')
    
 
 def checkout(request):

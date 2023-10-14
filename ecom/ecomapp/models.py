@@ -20,16 +20,16 @@ class Product(models.Model):
 class Cart(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     products=models.ManyToManyField('Product',through='CartItem')
-@property
-def total_price(self):
-    total=0
-    for item in self.products.all():
-        total += item.product.price*item.quantity
-    return total    
+    @property
+    def total_price(self):
+      total=0
+      for item in self.products.all():
+         total += item.product.price*item.quantity
+      return total    
 class CartItem(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     cart=models.ForeignKey(Cart,on_delete=models.CASCADE,default=0)
-    product=models.ForeignKey('Product',on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField(default=0)
 
 
