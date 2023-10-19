@@ -5,13 +5,17 @@ from .forms import  RegistrationForm,AuthenticationForm,ShippingAddressForm,Orde
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 
 # Create your views here.
 def home(request):
     products=Product.objects.all()
     return render(request,'ecomapp/home.html',{'products':products})
 
+def search_suggestions(request):
+    keyword=request.GET.get('q','')
+    suggestions=Product.objects.filter(name__icontains=keyword)[:10].value_list('name',flat=True)
+    return JsonResponse(list(suggestions),safe=False)
 def registration(request):
     if request.method=='POST':
         form=RegistrationForm(request.POST)

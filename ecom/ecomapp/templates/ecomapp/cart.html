@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Shopping Cart</title>
-</head>
-<body>
+{% extends 'ecomapp/base.html' %}
+
+{% block content%}
+<div style="background-color: beige;">
+    
+
     <h1>Your Shopping Cart</h1>
     <ul>
         {% for item in cart_items %}
@@ -15,5 +15,5 @@
     </ul>
     <p>Total Price: &#8377;{{ cart.total_price }}</p>
     <a href="{% url 'checkout' %}">Proceed to Checkout</a>
-</body>
-</html>
+{%endblock%}
+</div>

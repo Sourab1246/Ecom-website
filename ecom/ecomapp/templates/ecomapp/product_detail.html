@@ -29,7 +29,7 @@
                     {% else %}
                     <h3 class="discounted-price">Price: &#8377;{{ product.price }}</h3>
                     {% endif %}
-                    <a href="#" class="btn btn-primary">Buy Now</a>
+                    <a href="{% url 'checkout' %}" class="btn btn-primary">Buy Now</a>
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">  
                     <a href="{% url 'view_cart'%}" class="btn btn-success" type="submit">Add to cart</a>
