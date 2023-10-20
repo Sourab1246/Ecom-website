@@ -28,16 +28,17 @@
               </li>
              
               
-              <div>
+             
                 
               
               <form method="get"  action="{% url 'product_search' %}" class="search">
-                {{ form }}
+                {% csrf_token %}
                 <input type="text" class="form-control" name="search_query" placeholder="Search products">
                 <button type="submit" class="btn btn-primary">Search</button>
                 
               </form>
-            </div> 
+              
+             
 
               <div id="cart-icon">
                   <a href="{% url 'view_cart'  %}" id="cart "><i class="fas fa-shopping-cart custom-icon  mx-2 ">Cart</i></a>
