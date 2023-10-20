@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Product,CartItem,Order,Cart
 from django.contrib import messages
-from .forms import  RegistrationForm,AuthenticationForm,ShippingAddressForm,OrderForm
+from .forms import  RegistrationForm,AuthenticationForm,ShippingAddressForm,OrderForm,ProductSearchForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
@@ -49,6 +49,14 @@ def product_detail(request,product_id):
     product=get_object_or_404(Product,pk=product_id)
     return render(request,'ecomapp/product_detail.html',{'product':product})
 
+def product_search(request):
+    products=Product.objects.all()
+    form=ProductSearchForm(request.GET)
+    search_query=request.GET.get('search_query')
+
+    if search_query:
+        products=products.filter(name__icontains=search_query)
+    return render(request,'ecomapp/product_search.html',{'products':products,'form':form})    
 @login_required
 def add_to_cart(request,product_id):
     product=get_object_or_404(Product, pk=product_id)

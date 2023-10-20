@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- Add your CSS stylesheets and other necessary meta tags here -->
-</head>
-
-<body>
+{% extends 'ecomapp/base.html' %}
+{% block content%}
     <div class="container">
         <h2>Login</h2>
         <form method="post">
@@ -23,8 +14,5 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
         <p>Don't have an account? <a href="{% url 'registration' %}">Register</a></p>
-        <!-- Add any other relevant links or information here -->
-    </div>
-</body>
-
-</html>
+{%endblock%}
+    

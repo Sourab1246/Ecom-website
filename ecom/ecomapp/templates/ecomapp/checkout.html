@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Checkout</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
+{% extends 'ecomapp/base.html'%}
         
 
 {% block content %}
   <h1>Checkout</h1>
 
-  <form method="post" action="{% url 'checkout' %}">
+  <form method="post">
     {% csrf_token %}
     
     <!-- Shipping Address Section -->
@@ -37,20 +29,16 @@
       {{ form.phone_number }}
     </fieldset>
 
-    <!-- Payment Information Section (Add your payment fields here) -->
-    <fieldset>
-      <legend>Payment Information</legend>
-      <!-- Add payment fields here, e.g., credit card number, expiration date, etc. -->
-    </fieldset>
-
-    <!-- Order Summary Section -->
+    
+    
+    
     <fieldset>
       <legend>Order Summary</legend>
       <table class="table">
         <thead>
           <tr>
             <th>Product</th>
-            <th>Price</th>
+          <th>Price</th>
             <th>Quantity</th>
             <th>Total</th>
           </tr>
@@ -59,7 +47,7 @@
           {% for cart_item in cart_items %}
             <tr>
               <td>{{ cart_item.product.name }}</td>
-              <td>${{ cart_item.product.price }}</td>
+              <td>&#8377;{{ cart_item.product.price }}</td>
               <td>{{ cart_item.quantity }}</td>
               <td>&#8377;{{ cart_item.item_total }}</td>
             </tr>
@@ -68,7 +56,7 @@
         <tfoot>
           <tr>
             <td colspan="3">Total:</td>
-            <td>${{ total_price }}</td>
+            <td>&#8377;{{ total_price }}</td>
           </tr>
         </tfoot>
       </table>

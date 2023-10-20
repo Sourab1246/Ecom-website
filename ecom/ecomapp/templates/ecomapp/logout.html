@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logout</title>
-
-</head>
+{% extends 'ecomapp/base.html' %}
+{%block content%}
 
 <body>
     <div class="container">
@@ -17,6 +10,4 @@
         <p><a href="{% url 'login' %}">Log In</a></p>
         <p><a href="{% url 'home' %}">Back to Home</a></p>
     </div>
-</body>
-
-</html>
+{%endblock%}

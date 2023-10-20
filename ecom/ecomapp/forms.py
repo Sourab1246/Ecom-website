@@ -36,3 +36,6 @@ class OrderForm(forms.Form):
     product=forms.CharField()
     quantity=forms.IntegerField()
     payment_option=forms.CharField(max_length=20)
+
+class ProductSearchForm(forms.Form):
+    search_query=forms.CharField(max_length=100,required=False,label='Search')    

@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>OrderConfirmation</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
+{% extends 'ecomapp/base.html' %}
+
         {% block content %}
         <h1>Order Confirmation</h1>
       
@@ -20,5 +13,4 @@
           <p>Order not found. Please contact customer support for assistance.</p>
         {% endif %}
       {% endblock %}
-    </body>
-</html>
+    

@@ -1,0 +1,32 @@
+{% extends "ecomapp/base.html" %}
+
+{% block content %}
+  
+  <ul>
+    {% for product in products %}
+    <div class="col-md-4 mb-4  mx-4 my-4">
+        <div class="card " style="width: 18rem; border: 10px white; border-radius: 50px;">
+            <img src="{{ product.image.url }}" class="card-img-centre" alt="{{ product.name }} Image">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                
+
+                {% if product.discount_percent > 0 %}
+                <p class="original-price">&#8377;{{ product.price }}</p>
+                <h4 class="discount percent">{{ product.discount_percent }}% off</h4>
+
+                <h4 class="discounted-price">Sale Price: &#8377;{{ product.discounted_price|floatformat:2 }}</h4>
+                {% else %}
+                <h3 class="discounted-price">Price: &#8377;{{ product.price }}</h3>
+                {% endif %}
+                <a href="{% url 'checkout' %}" class="btn btn-primary">Buy Now</a>
+                <a href="" class="btn btn-success">Add to cart</a>
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a> 
+            </div>
+        </div>
+    </div>
+    {% empty %}
+      <p>No products found.</p>
+    {% endfor %}
+  </ul>
+{% endblock %}
